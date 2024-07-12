@@ -7,7 +7,18 @@ const slice = createSlice({
 
     reducers: {
         addItemToCart:(state, action)=>{
-            return [...state, {productId:action.payload.productId, quantity: action.payload.quantity}]
+            let result = state.find(item => item.productId == action.payload.productId);
+            
+            if(result)
+                return state;
+
+            return [...state, {
+                productId:action.payload.productId,
+                title:action.payload.title,
+                rate:action.payload.rate,
+                imageURL:action.payload.imageURL,
+                price:action.payload.price,
+                quantity: 1}]
         },
 
         removeItemFromCart:(state, action)=>{
